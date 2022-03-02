@@ -2,7 +2,7 @@
 
 function declesion($num, $arr)
 {
-    $end = $num%10;
+    $end = $num % 10;
     
     if ($num >=11 && $num <= 14) {
         return $num . " " . $arr[2];  
