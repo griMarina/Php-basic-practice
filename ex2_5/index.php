@@ -1,4 +1,4 @@
-<?
+<?php
 
 $content = renderTemplate("content", "555-555");
 $menu = renderTemplate("menu");

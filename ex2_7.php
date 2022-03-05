@@ -1,4 +1,4 @@
-<?
+<?php
 
 function declesion($num, $arr)
 {

@@ -1,4 +1,4 @@
-<?
+<?php
 
 function add($arg1, $arg2)
 {
@@ -17,7 +17,7 @@ function multiply($arg1, $arg2)
 
 function divide($arg1, $arg2)
 {
-    return ($arg2 === 0) ? "error: division by zero!" : $arg1 / $arg2; 
+    return ($arg2 !== 0) ? $arg1 / $arg2 : "error: division by zero!"; 
 }
 
 function mathOperation($arg1, $arg2, $operation) 
