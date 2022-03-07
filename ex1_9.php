@@ -35,14 +35,14 @@ $regions = [
 
 foreach ($regions as $key => $reg) {
     echo $key . ": <br>";
-    $str = "";
+    $str_cities = "";
     
     foreach ($reg as $city) {
-        $str .= $city . ", ";            
+        $str_cities .= $city . ", ";            
     }
 
-    $str = substr_replace($str, ".", -2, 1);
-    echo $str . "<br>";  
+    $str_cities = substr_replace($str_cities, ".", -2, 1);
+    echo $str_cities . "<br>";  
 }
 
 // 3.4
@@ -99,11 +99,15 @@ for ($i = 0; $i <= 9; print($i++));
 // 3.8
 
 foreach ($regions as $key => $reg) {
+    echo $key . ": <br>";
+    $str_cities = "";
     
     foreach ($reg as $city) {
-       if (mb_substr($city, 0, 1) == "К") echo $city . " ";
+        if (mb_substr($city, 0, 1) == "К") $str_cities .= $city . ", ";             
     }
 
+    $str_cities = substr_replace($str_cities, ".", -2, 1);
+    echo $str_cities . "<br>";  
 }
 
 // 3.9
