@@ -11,7 +11,7 @@ $menu = [
     "href" => "#4"],
 ];
 
-include "menu.php";
+include "menu_template.php";
 
 /*  
 Пыталась сделать вложенное меню, но не осилила :(
