@@ -1,0 +1,6 @@
+ѕодборка материалов
+* http://devenergy.ru/archives/268 - применение рекурсии
+* https://habrahabr.ru/company/mailru/blog/103983/ - замыкани¤ 1
+* https://habrahabr.ru/post/147620/ - замыкания 2
+* https://geekbrains.ru/events/221 - PHP SPL и массивы в PHP
+* https://habrahabr.ru/post/115825/ - регулярные выражения (пригодятся в 4 задании)
