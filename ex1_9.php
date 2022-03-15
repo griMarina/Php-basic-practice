@@ -1,26 +1,26 @@
 <?php
 
 // 3.1
-$n = 0;
+$i = 0;
 
-while ($n <= 100) {
-    if (!($n % 3)) echo $n ." ";
-    $n++;
+while ($i <= 100) {
+    if ($i % 3 === 0) echo $i ." ";
+    $i++;
 }
 
 // 3.2
 
-$num = 0;
+$i = 0;
 
 do {
-    if ($num === 0) {
-        echo "$num - ноль.<br>";
+    if ($i === 0) {
+        echo "$i - ноль.<br>";
     } else {
-        $e = ($num & 1) ? "нечётное" : "чётное"; 
-        echo "$num - $e.<br>";
+        $e = ($i & 1 !== 0) ? "нечётное" : "чётное"; 
+        echo "$i - $e.<br>";
     }
-    $num++;
-} while ($num <= 10);
+    $i++;
+} while ($i <= 10);
 
 // 3.3
 
@@ -75,7 +75,7 @@ function translate($str, $arr = ALFABET) {
         $letter = mb_substr($str, $i, 1);
         $let_low = mb_strtolower($letter);
     
-        if (($arr[$let_low])) {
+        if (isset(($arr[$let_low]))) {
             $translate .= ($letter == $let_low) ? $arr[$let_low] : ucfirst($arr[$let_low]);
         } else {
             $translate .= $letter;
@@ -94,7 +94,7 @@ function replace($str) {
 
 // 3.7
 
-for ($i = 0; $i <= 9; print($i++));
+for ($i = 0; $i <= 9; print $i++);
 
 // 3.8
 
