@@ -7,7 +7,7 @@
     </form>
 	<div class="gallery">
         <?php foreach ($images as $image): ?>
-            <a rel="gallery" class="photo" href= '<?= IMG_DIR . "big/" . $image?>'><img src='<?= IMG_DIR . "small/" . $image?>'/></a>
+            <a rel="gallery" class="photo" target="_blanc" href= '<?= IMG_DIR . "big/" . $image?>'><img src='<?= IMG_DIR . "small/" . $image?>'/></a>
         <?php endforeach; ?>
     </div> 
 </div>

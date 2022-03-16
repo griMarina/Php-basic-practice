@@ -1,9 +1,7 @@
 body {
-	background: rgb(254, 255, 221) url('img/body.jpg');
-	color: rgb(33, 36, 51);
+    background-color: beige;
 	font: normal 1.2em Verdana,Arial,sans-serif;
 	height: 100%;
-	padding-bottom: 1px;
 }
 
 .message {
@@ -16,5 +14,5 @@ body {
 
 .gallery {
     max-width: 1000px;
-    padding: 0 calc(50% - 570px);
+    padding: 0 calc(50% - 470px);
 }
