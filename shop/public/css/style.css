@@ -1,5 +1,5 @@
 body {
-    background-color: beige;
+    background: rgb(214, 236, 241) url(../img/white-wall.png);
 	font: normal 1.2em Verdana,Arial,sans-serif;
 	height: 100%;
 }
