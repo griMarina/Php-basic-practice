@@ -1,0 +1,22 @@
+body {
+    background: rgb(214, 236, 241) url(../img/white-wall.png);
+	font: normal 1.2em Verdana,Arial,sans-serif;
+	height: 100%;
+}
+
+.message {
+    margin-top: 50px;
+}
+
+.form {
+    margin-bottom: 40px;
+}
+
+.gallery {
+    max-width: 1000px;
+    padding: 0 calc(50% - 470px);
+}
+
+.link {
+    margin-right: 20px;
+}
