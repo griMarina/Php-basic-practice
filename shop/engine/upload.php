@@ -2,10 +2,7 @@
 
 function upload() {
 
-    $imgBig = pathToImg("big");
-    $imgBig = pathToImg("small");
-
-    if (file_exists($imgBig)) { 
+    if (file_exists(pathToImg("big"))) { 
         $status = "name";
         goto end;
     } 
@@ -28,17 +25,14 @@ function upload() {
         goto end;   
     }
     
-    if (move_uploaded_file($_FILES["myimg"]["tmp_name"], $imgBig)) {
+    if (move_uploaded_file($_FILES["myimg"]["tmp_name"], pathToImg("big"))) {
         $status = "ok";
     } else {
         $status = "error";
     }
     
-    $image = new SimpleImage();
-    $image->load($imgBig);
-    $image->scale(50);
-    $image->save($imgBig);
-
+    resizeImg();
+    
     end:
     return $status;
 }

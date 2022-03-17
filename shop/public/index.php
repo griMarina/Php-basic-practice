@@ -29,15 +29,17 @@ switch ($page) {
         $params["phone"] = 123123;
         break;
     case "gallery":
+        
         if (!empty($_FILES)) {
-            upload();
             $status = upload();
-            header("Location:/?page=gallery&status=" . $status);
+            header("Location:/?page=gallery&status=$status");
             die();
         }
+
         $params["title"] = "Gallery";
         $params["images"] = getGallery();
-        $params["message"] = getMessage($status);        
+        $params["message"] = getMessage($status);
+               
         break;
     default: 
         echo "Error! 404!";

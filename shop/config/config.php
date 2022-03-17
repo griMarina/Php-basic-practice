@@ -13,3 +13,4 @@ include "../engine/gallery.php";
 include "../engine/upload.php";
 include "../engine/messages.php";
 include "../engine/pathToImg.php";
+include "../engine/resize.php";
