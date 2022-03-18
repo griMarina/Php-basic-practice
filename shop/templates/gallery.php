@@ -3,7 +3,7 @@
     <p class="message"><?=$message?></p>
     <form class="form" method="POST" enctype="multipart/form-data">
         <input type="file" name="myimg">
-        <input type="submit" value="Download">
+        <input type="submit" value="Upload">
     </form>
 	<div class="gallery">
         <?php foreach ($images as $image): ?>
