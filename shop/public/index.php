@@ -1,6 +1,6 @@
 <?php
 
-include "../config/config.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/../config/config.php";
 
 $page = "index";
 
@@ -17,34 +17,42 @@ if (isset($_GET["status"])) {
     $status = "";
 }
 
+$layout = "main";
+
 switch ($page) {
+
     case "index":
         $params["title"] = "Main";
         break;
+
     case "catalog":
         $params["title"] = "Catalog";
         $params["catalog"] = getCatalog();
         break;
+
     case "about":
         $params["title"] = "About Us";
         $params["phone"] = 123123;
         break;
+
     case "gallery":
+
+        $layout = "gallery";
         
         if (!empty($_FILES)) {
-            $status = upload();
+            $status = uploadImg();
             header("Location:/?page=gallery&status=$status");
             die();
         }
 
         $params["title"] = "Gallery";
-        $params["images"] = getGallery();
-        $params["message"] = getMessage($status);
-               
+        $params["images"] = getGallery(IMG_SMALL);
+        $params["message"] = getMessage($status);   
         break;
+
     default: 
         echo "Error! 404!";
         die();
 }
 
-echo render($page, $params);
+echo render($page, $params, $layout);
