@@ -8,13 +8,13 @@ function getMenu() {
         ],
         [
             "name" => "Catalog",
-            "href" => "/?page=catalog"
+            "href" => "/catalog"
         ],
         [   "name" => "About us",
-            "href" => "/?page=about"
+            "href" => "/about"
         ],
         [   "name" => "Gallery",
-            "href" => "/?page=gallery"
+            "href" => "/gallery"
         ],
     ];
 }

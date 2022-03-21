@@ -2,22 +2,24 @@
 
 include $_SERVER["DOCUMENT_ROOT"] . "/../config/config.php";
 
-$page = "index";
+$url_arr = explode('/', $_SERVER['REQUEST_URI']);
 
-if (isset($_GET["page"])) {
-    $page = $_GET["page"];
+if ($url_arr[1] === "") {
+    $page = "index";
+} else {
+    $page = $url_arr[1];
 }
 
-$params["menu"] = getMenu();
+$status = $_GET["status"] ?? "";
 
-
-if (isset($_GET["status"])) {
+/*if (isset($_GET["status"])) {
     $status = $_GET["status"];   
 } else {
     $status = "";
-}
+}*/
 
 $layout = "main";
+$params["menu"] = getMenu();
 
 switch ($page) {
 
@@ -36,12 +38,11 @@ switch ($page) {
         break;
 
     case "gallery":
-
         $layout = "gallery";
         
         if (!empty($_FILES)) {
             $status = uploadImg();
-            header("Location:/?page=gallery&status=$status");
+            header("Location:/gallery/?status=$status");
             die();
         }
 
@@ -54,11 +55,17 @@ switch ($page) {
     case "image":
 
         $layout = "gallery";
-
         $id = (int)$_GET["id"];
+        updateViews($id);
+
         $params["title"] = "Image";
-        $params["postTitle"] = "Image $id";
+        $params["postTitle"] = "Image";
         $params["image"] = getImage($id);
+        break;
+
+    case "install":
+
+        insertGallery();
         break;
 
     default: 

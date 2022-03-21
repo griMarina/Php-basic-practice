@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0-rc1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost
--- Время создания: Мар 20 2022 г., 22:06
+-- Хост: localhost:8889
+-- Время создания: Мар 21 2022 г., 23:00
 -- Версия сервера: 5.7.34
 -- Версия PHP: 7.4.21
 
@@ -29,26 +29,27 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `images` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name_img` varchar(255) NOT NULL
+  `name_img` varchar(255) NOT NULL,
+  `views` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `images`
 --
 
-INSERT INTO `images` (`id`, `name_img`) VALUES
-(1, '01.jpg'),
-(2, '02.jpg'),
-(3, '03.jpg'),
-(4, '04.jpg'),
-(5, '05.jpg'),
-(6, '06.jpg'),
-(7, '07.jpg'),
-(8, '08.jpg'),
-(9, '09.jpg'),
-(10, '10.jpg'),
-(11, '11.jpg'),
-(12, '12.jpg');
+INSERT INTO `images` (`id`, `name_img`, `views`) VALUES
+(1, '01.jpg', 0),
+(2, '02.jpg', 0),
+(3, '03.jpg', 0),
+(4, '04.jpg', 0),
+(5, '05.jpg', 0),
+(6, '06.jpg', 0),
+(7, '07.jpg', 0),
+(8, '08.jpg', 0),
+(9, '09.jpg', 0),
+(10, '10.jpg', 0),
+(11, '11.jpg', 0),
+(12, '12.jpg', 0);
 
 --
 -- Индексы сохранённых таблиц

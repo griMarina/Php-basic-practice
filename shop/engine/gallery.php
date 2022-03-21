@@ -1,10 +1,13 @@
 <?php 
 
-function getGallery() {
-    return getAssocResult("SELECT id, name_img FROM images"); 
+function getArrImg($img_dir) {
+    $arr = scandir($img_dir);
+    return array_splice($arr, 2);
 }
 
-
+function getGallery() {
+    return getAssocResult("SELECT id, name_img, views FROM images ORDER BY views DESC"); 
+}
 
 function pathToImg($dir) {
     return $dir . basename($_FILES["myimg"]["name"]);
@@ -37,11 +40,11 @@ function uploadImg() {
     
     if (move_uploaded_file($_FILES["myimg"]["tmp_name"], pathToImg(IMG_BIG))) {
         $status = "ok";
+        resizeImg();
+        insertImg($_FILES["myimg"]["name"]);
     } else {
         $status = "error";
     }
-
-    resizeImg();
 
     return $status;
 }
@@ -53,6 +56,10 @@ function resizeImg() {
     $image->scale(50);
     $image->save(pathToImg(IMG_SMALL));
     var_dump(pathToImg(IMG_SMALL));
+}
+
+function insertImg($imgName) {
+    return mysqli_query(getDb(), "INSERT INTO `images` (`name_img`) VALUES ('$imgName')");
 }
 
 function getMessage($status) {

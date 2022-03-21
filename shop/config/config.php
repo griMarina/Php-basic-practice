@@ -19,3 +19,4 @@ include ROOT . "/engine/menu.php";
 include ROOT . "/engine/gallery.php";
 include ROOT . "/engine/image.php";
 include ROOT . "/engine/classSimpleImage.php";
+include ROOT . "/engine/install.php";
