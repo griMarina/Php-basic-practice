@@ -46,8 +46,19 @@ switch ($page) {
         }
 
         $params["title"] = "Gallery";
-        $params["images"] = getGallery(IMG_SMALL);
+        $params["postTitle"] = "My Gallery";
+        $params["images"] = getGallery();
         $params["message"] = getMessage($status);   
+        break;
+
+    case "image":
+
+        $layout = "gallery";
+
+        $id = (int)$_GET["id"];
+        $params["title"] = "Image";
+        $params["postTitle"] = "Image $id";
+        $params["image"] = getImage($id);
         break;
 
     default: 

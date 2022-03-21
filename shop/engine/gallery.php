@@ -1,9 +1,10 @@
 <?php 
 
-function getGallery($img_dir) {
-    $arr = scandir($img_dir);
-    return array_splice($arr, 2);
+function getGallery() {
+    return getAssocResult("SELECT id, name_img FROM images"); 
 }
+
+
 
 function pathToImg($dir) {
     return $dir . basename($_FILES["myimg"]["name"]);
