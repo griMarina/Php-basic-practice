@@ -52,10 +52,8 @@ function uploadImg() {
 function resizeImg() {
     $image = new SimpleImage();
     $image->load(pathToImg(IMG_BIG));
-    var_dump(pathToImg(IMG_BIG));
     $image->scale(50);
-    $image->save(pathToImg(IMG_SMALL));
-    var_dump(pathToImg(IMG_SMALL));
+    $image->save(pathToImg($_SERVER["DOCUMENT_ROOT"] . IMG_SMALL));
 }
 
 function insertImg($imgName) {

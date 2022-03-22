@@ -2,7 +2,7 @@
 <div class="gallery_img">
 <?php foreach ($images as $img): ?>
    
-    <div ><a class="photo" href="/image/?id=<?=$img['id']?>"><img src="/img/gallery_img/small/<?= $img['name_img']?>"/></a>
+    <div ><a class="photo" href="/image/?id=<?=$img['id']?>"><img src="<?=IMG_SMALL . $img['name_img']?>"/></a>
     <p class="views"><?=$img['views']?> views</p></div>
     
 <?php endforeach; ?>

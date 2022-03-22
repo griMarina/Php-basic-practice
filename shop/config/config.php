@@ -4,7 +4,7 @@ define("ROOT", dirname(__DIR__));
 define("TEMPLATES_DIR", ROOT . "/templates/");
 define("IMG_DIR", $_SERVER["DOCUMENT_ROOT"] . "/img/gallery_img/");
 define("IMG_BIG", $_SERVER["DOCUMENT_ROOT"] . "/img/gallery_img/big/");
-define("IMG_SMALL", $_SERVER["DOCUMENT_ROOT"] . "/img/gallery_img/small/");
+define("IMG_SMALL", "/img/gallery_img/small/");
 define("LAYOUTS_DIR", "layouts/");
 
 define("HOST", "localhost:8889");
@@ -20,3 +20,4 @@ include ROOT . "/engine/gallery.php";
 include ROOT . "/engine/image.php";
 include ROOT . "/engine/classSimpleImage.php";
 include ROOT . "/engine/install.php";
+include ROOT . "/templates/menu.php";
