@@ -66,7 +66,8 @@ switch ($page) {
     case "install":
 
         insertGallery();
-        break;
+        header("Location:/");
+        die();
 
     default: 
         echo "Error! 404!";
