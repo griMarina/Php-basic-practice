@@ -41,7 +41,8 @@ function uploadImg() {
     if (move_uploaded_file($_FILES["myimg"]["tmp_name"], pathToImg(IMG_BIG))) {
         $status = "ok";
         resizeImg();
-        insertImg($_FILES["myimg"]["name"]);
+        $filename = mysqli_real_escape_string(getDb(), $_FILES["myimg"]["name"]);
+        insertFile($filename);
     } else {
         $status = "error";
     }
@@ -56,8 +57,8 @@ function resizeImg() {
     $image->save(pathToImg($_SERVER["DOCUMENT_ROOT"] . IMG_SMALL));
 }
 
-function insertImg($imgName) {
-    return mysqli_query(getDb(), "INSERT INTO `images` (`name_img`) VALUES ('$imgName')");
+function insertFile($filename) {
+    return mysqli_query(getDb(), "INSERT INTO `images` (`name_img`) VALUES ('$filename')");
 }
 
 function getMessage($status) {
