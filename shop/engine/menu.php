@@ -13,11 +13,14 @@ function getMenu() {
         [   "name" => "About us",
             "href" => "/about"
         ],
-        [   "name" => "Gallery",
-            "href" => "/gallery"
+        [   "name" => "Image Gallery",
+            "href" => "/image_gallery"
         ],
         [   "name" => "Calculator",
             "href" => "/calculator/"
+        ],
+        [   "name" => "Item Gallery",
+            "href" => "/item_gallery"
         ],
     ];
 }

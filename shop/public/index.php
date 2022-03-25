@@ -35,7 +35,7 @@ switch ($page) {
         $params["phone"] = 123123;
         break;
 
-    case "gallery":
+    case "image_gallery":
         $layout = "gallery";
         
         if (!empty($_FILES)) {
@@ -44,8 +44,8 @@ switch ($page) {
             die();
         }
 
-        $params["title"] = "Gallery";
-        $params["postTitle"] = "My Gallery";
+        $params["title"] = "Image Gallery";
+        $params["postTitle"] = "Image Gallery";
         $params["images"] = getGallery();
         $params["message"] = getMessage($status);   
         break;
@@ -74,7 +74,27 @@ switch ($page) {
         $params["arg2"] = $arg2;
         $params["operation"] = $operation;
         $params["result"] = mathOperation($arg1, $arg2, $operation);
-        
+        break;
+    
+    case "item_gallery":
+        $layout = "gallery";
+
+        $params["title"] = "Item Gallery";
+        $params["postTitle"] = "Item Gallery";
+        $params["items"] = getItems();
+
+        break;
+
+    case "item":
+
+        $layout = "gallery";
+        $id = (int)$_GET["id"];
+        updateItemViews($id);
+        $item = getItem($id);
+
+        $params["title"] = "Item";
+        $params["item"] = $item;
+        $params["postTitle"] = $item["item_title"];
         break;
 
     case "install":
