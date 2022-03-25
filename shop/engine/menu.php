@@ -16,5 +16,8 @@ function getMenu() {
         [   "name" => "Gallery",
             "href" => "/gallery"
         ],
+        [   "name" => "Calculator",
+            "href" => "/calculator/"
+        ],
     ];
 }

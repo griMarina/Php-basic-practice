@@ -20,4 +20,5 @@ include ROOT . "/engine/gallery.php";
 include ROOT . "/engine/image.php";
 include ROOT . "/engine/classSimpleImage.php";
 include ROOT . "/engine/install.php";
+include ROOT . "/engine/calculator.php";
 include ROOT . "/templates/menu.php";

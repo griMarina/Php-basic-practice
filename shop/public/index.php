@@ -12,14 +12,12 @@ if ($url_arr[1] === "") {
 
 $status = $_GET["status"] ?? "";
 
-/*if (isset($_GET["status"])) {
-    $status = $_GET["status"];   
-} else {
-    $status = "";
-}*/
-
 $layout = "main";
 $params["menu"] = getMenu();
+
+$result = 0; 
+$arg1 = 0; 
+$arg2 = 0;
 
 switch ($page) {
 
@@ -61,6 +59,22 @@ switch ($page) {
         $params["title"] = "Image";
         $params["postTitle"] = "Image";
         $params["image"] = getImage($id);
+        break;
+    
+    case "calculator": 
+        $operation = $_GET["operation"] ?? "+";
+
+        if (!empty($_GET)) {
+            $arg1 = $_GET["arg1"];
+            $arg2 = $_GET["arg2"];
+        }
+
+        $params["title"] = "Calculator";
+        $params["arg1"] = $arg1;
+        $params["arg2"] = $arg2;
+        $params["operation"] = $operation;
+        $params["result"] = mathOperation($arg1, $arg2, $operation);
+        
         break;
 
     case "install":
