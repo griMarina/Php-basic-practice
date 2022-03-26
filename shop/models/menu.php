@@ -17,10 +17,13 @@ function getMenu() {
             "href" => "/image_gallery"
         ],
         [   "name" => "Calculator",
-            "href" => "/calculator/"
+            "href" => "/calculator"
         ],
         [   "name" => "Item Gallery",
             "href" => "/item_gallery"
+        ],
+        [   "name" => "Feedback",
+            "href" => "/feedback"
         ],
     ];
 }

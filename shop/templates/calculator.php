@@ -1,5 +1,5 @@
 <p>Calculator 1</p>
-<form action="" method="get">
+<form action="/calculator/" method="get">
     <input type="text" name="arg1" value="<?=$arg1?>">
     <select name="operation">
         <option <?php if ($operation == "+") echo "selected"?> >+</option>
@@ -14,7 +14,7 @@
 <br>
 <hr>
 <p>Calculator 2</p>
-<form action="" method="get">
+<form action="/calculator/" method="get">
     <input type="text" name="arg1" value="<?=$arg1?>">
     <input type="submit" name="operation" value="+">
     <input type="submit" name="operation" value="-">

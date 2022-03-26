@@ -1,22 +1,23 @@
 <?php
 
-function render($page, $params =[], $layout = "main") {
-    return renderTemplate(LAYOUTS_DIR . $layout, [
+function render($page, $params = []) {
+    return renderTemplate(LAYOUTS_DIR . "main", [
         "title" => $params["title"],
-        "menu" => renderMenu($params["menu"]),
+        "menu" => renderTemplate("menu", $params),
         "content" => renderTemplate($page, $params)
     ]);
 }
 
-function renderTemplate($page, $params =[]) {
+function renderTemplate($page, $params = []) {
     
     /* foreach ($params as $key => $value) {
         $$key = $value;
     } */
 
-    extract($params);
-
     ob_start();
+
+    extract($params);
+   
     include TEMPLATES_DIR . $page . ".php";
     return ob_get_clean();
 }
