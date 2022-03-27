@@ -1,5 +1,6 @@
-<h2>Catalog</h2>
-
+<div class="post_title">
+    <h2>Catalog</h2>
+</div>
 <div>
     <?php foreach ($catalog as $item): ?>
         <div>

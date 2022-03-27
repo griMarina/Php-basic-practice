@@ -10,7 +10,7 @@ if ($url_arr[1] === "") {
     $page = $url_arr[1];
 }
 
-$action = $url_arr[2];
+$action = $url_arr[2] ?? "";
 
 $params = prepareVariables($page, $action);
 

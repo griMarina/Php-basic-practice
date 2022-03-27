@@ -13,14 +13,14 @@ function getMenu() {
         [   "name" => "About us",
             "href" => "/about"
         ],
-        [   "name" => "Image Gallery",
-            "href" => "/image_gallery"
+        [   "name" => "Gallery",
+            "href" => "/gallery"
         ],
         [   "name" => "Calculator",
             "href" => "/calculator"
         ],
-        [   "name" => "Item Gallery",
-            "href" => "/item_gallery"
+        [   "name" => "Catalog DB",
+            "href" => "/catalog_db"
         ],
         [   "name" => "Feedback",
             "href" => "/feedback"

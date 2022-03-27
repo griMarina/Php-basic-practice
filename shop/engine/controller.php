@@ -1,13 +1,10 @@
 <?php
+//error_reporting(!E_NOTICE);
 
 function prepareVariables($page, $action) {
 
     $status = $_GET["status"] ?? "";
-    //$layout = "main";
     $params["menu"] = getMenu();
-
-    $arg1 = 0; 
-    $arg2 = 0;
 
     switch ($page) {
 
@@ -25,8 +22,7 @@ function prepareVariables($page, $action) {
             $params["phone"] = 123123;
             break;
 
-        case "image_gallery":
-          //  $layout = "gallery";
+        case "gallery":
         
             if (!empty($_FILES)) {
                 $status = uploadImg();
@@ -34,25 +30,24 @@ function prepareVariables($page, $action) {
                 die();
             }
 
-            $params["title"] = "Image Gallery";
-            $params["postTitle"] = "Image Gallery";
+            $params["title"] = "Gallery";
             $params["images"] = getGallery();
             $params["message"] = getMessage($status);   
             break;
 
         case "image":
 
-           // $layout = "gallery";
             $id = (int)$_GET["id"];
             updateViews($id);
 
             $params["title"] = "Image";
-            $params["postTitle"] = "Image";
             $params["image"] = getImage($id);
             break;
         
         case "calculator": 
             $operation = $_GET["operation"] ?? "+";
+            $arg1 = 0; 
+            $arg2 = 0;
 
             if (!empty($_GET)) {
                 $arg1 = $_GET["arg1"];
@@ -66,18 +61,14 @@ function prepareVariables($page, $action) {
             $params["result"] = mathOperation($arg1, $arg2, $operation);
             break;
         
-        case "item_gallery":
-           // $layout = "gallery";
+        case "catalog_db":
 
-            $params["title"] = "Item Gallery";
-            $params["postTitle"] = "Item Gallery";
+            $params["title"] = "Catalog DB";
             $params["items"] = getItems();
-
             break;
 
         case "item":
 
-            //$layout = "gallery";
             $id = (int)$_GET["id"];
             updateItemViews($id);
             $item = getItem($id);
@@ -88,12 +79,15 @@ function prepareVariables($page, $action) {
             break;
 
         case "feedback":
-            if ($action == "add") {
-                var_dump($_POST);
-            }
+
+            $feedback = doFeedbackAction($action);
+    
             $params["title"] = "Feedback";
             $params["feedback"] = getFeedback();
-
+            $params["message"] = getFeedbackMessage($status);
+            $params["buttonText"] = $feedback["buttonText"];
+            $params["result"] = $feedback["result"];
+            $params["actionFeedback"] = $feedback["actionFeedback"];
             break;
 
         case "install":
