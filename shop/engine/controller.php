@@ -73,9 +73,12 @@ function prepareVariables($page, $action) {
             updateItemViews($id);
             $item = getItem($id);
 
+
             $params["title"] = "Item";
-            $params["item"] = $item;
-            $params["postTitle"] = $item["item_title"];
+            if (isset($item)) {
+                $params["item"] = $item;
+                $params["postTitle"] = $item["item_title"];
+            }
             break;
 
         case "feedback":

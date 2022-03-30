@@ -17,9 +17,9 @@ function getFeedbackMessage($status) {
     return $messages[$status];
 }
 
-function addFeedback() {
-    $name = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $_POST["name"])));
-    $text = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $_POST["text"])));
+function addFeedback($name, $text) {
+    $name = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $name)));
+    $text = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $text )));
     
     executeSql("INSERT INTO feedback(name, text) VALUES ('$name', '$text')");
 
@@ -28,8 +28,7 @@ function addFeedback() {
     die();
 }
 
-function deleteFeedback() {
-    $id = (int)$_GET['id'];
+function deleteFeedback($id) {
 
     executeSql("DELETE FROM feedback WHERE id=$id");
    
@@ -38,8 +37,8 @@ function deleteFeedback() {
     die();
 }
 
-function editFeedback() {
-    $id = (int)$_GET['id'];
+function editFeedback($id) {
+
     $result = getOneResult("SELECT * FROM feedback WHERE id=$id");
     $buttonText = "Edit message";
     $actionFeedback = "save";
@@ -52,11 +51,10 @@ function editFeedback() {
 
 }
 
-function saveFeedback() {
-    $id = (int)$_POST['id'];
+function saveFeedback($name, $text, $id) {
 
-    $name = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $_POST["name"])));
-    $text = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $_POST["text"])));
+    $name = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $name)));
+    $text = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $text)));
 
     executeSql("UPDATE feedback SET name='$name', text='$text' WHERE id = $id");
    
@@ -66,15 +64,21 @@ function saveFeedback() {
 }
 
 function doFeedbackAction($action) {
+
+    $name = $_POST["name"] ?? "";
+    $text = $_POST["text"] ?? "";
+    $id = $_GET['id'] ?? "";
+
     switch($action) {
         case "add":
-            addFeedback();
+            addFeedback($name, $text);
         case "delete":
-            deleteFeedback();
+            deleteFeedback($id);
         case "edit":
-            return editFeedback();
+            return editFeedback($id);
         case "save":   
-            saveFeedback();
+            $id = (int)$_POST['id'];
+            saveFeedback($name, $text, $id);
     }
     return [
         "result" => ["id" => "", "name" => "", "text" => ""],
