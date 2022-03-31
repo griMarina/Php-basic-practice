@@ -1,14 +1,15 @@
 <div class="post_title">
-    <h2>Catalog</h2>
+    <h2>Catalog
+    </h2>
 </div>
-<div>
-    <?php foreach ($catalog as $item): ?>
-        <div>
-            <?=$item['name']?><br>
-            <img src="./img/<?=$item['image']?>" alt="img" width="200"><br>
-            Price: <?=$item['price']?><br>
-            <button>Buy</button>
-            <hr>
-        </div>
-    <?php endforeach; ?>
+<div class="gallery_img">
+<?php foreach ($items as $item): ?>
+    <form action="/catalog/buy" class="form_catalog" method="POST">
+        <input type="text" hidden name="id" value="<?=$item['item_id']?>">
+        <a class="photo" href="/item/?id=<?=$item['item_id']?>"><img src="<?=IMG_SMALL . $item['item_img']?>"/></a>
+        <div class="form_text"><p><?=$item['item_title']?></p>
+        <p><?=$item['item_price']?> $</p></div>
+        <input class="submit_btn" type="submit" value="Buy">
+    </form>     
+<?php endforeach; ?>
 </div>

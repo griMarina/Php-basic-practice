@@ -1,14 +1,10 @@
 <?php
 
-function getMenu() {
+function getMenu($count) {
     return [
         [
             "name" => "Main",
             "href" => "/"
-        ],
-        [
-            "name" => "Catalog",
-            "href" => "/catalog"
         ],
         [   "name" => "About us",
             "href" => "/about"
@@ -19,8 +15,13 @@ function getMenu() {
         [   "name" => "Calculator",
             "href" => "/calculator"
         ],
-        [   "name" => "Catalog DB",
-            "href" => "/catalog_db"
+        [
+            "name" => "Catalog",
+            "href" => "/catalog"
+        ],
+        [
+            "name" => "Cart ($count)",
+            "href" => "/cart"
         ],
         [   "name" => "Feedback",
             "href" => "/feedback"

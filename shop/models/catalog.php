@@ -1,6 +1,12 @@
 <?php
 
 function getCatalog() {
+    return getAssocResult("SELECT * FROM items ORDER BY item_views DESC"); 
+}
+
+
+
+/*function getCatalog() {
     return [
         [
             "name" => "Rucksack",
@@ -18,4 +24,4 @@ function getCatalog() {
             "image" => "item-3.jpg"
         ],
     ];
-}
+}*/

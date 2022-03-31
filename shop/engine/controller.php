@@ -3,18 +3,18 @@
 
 function prepareVariables($page, $action) {
 
-    $status = $_GET["status"] ?? "";
-    $params["menu"] = getMenu();
+    session_start();
+    $session = session_id();
+
+    $status = $_GET["status"] ?? "";    
+    $res = getOneResult("SELECT count(id) as count FROM `cart` WHERE `session_id` = '$session'");
+    $count = (int) $res["count"];
+    $params["menu"] = getMenu($count);
 
     switch ($page) {
 
         case "index":
             $params["title"] = "Main";
-            break;
-
-        case "catalog":
-            $params["title"] = "Catalog";
-            $params["catalog"] = getCatalog();
             break;
 
         case "about":
@@ -61,11 +61,40 @@ function prepareVariables($page, $action) {
             $params["result"] = mathOperation($arg1, $arg2, $operation);
             break;
         
-        case "catalog_db":
+        case "catalog":
 
-            $params["title"] = "Catalog DB";
-            $params["items"] = getItems();
+            $params["title"] = "Catalog";
+            $params["items"] = getCatalog();
+
+            if ($action == "buy") {
+                $id = (int)$_POST["id"];
+                mysqli_query(getDb(), "INSERT INTO `cart` (`session_id`, `item_id`) VALUES ('$session', '$id')");
+                header("Location: /catalog/");
+                die();
+            }
+
             break;
+
+        case "cart":
+
+            if ($action == "delete") {
+                $id = (int)$_POST["id"];
+                $result = getOneResult("SELECT cart.id as cart_id, items.item_id as item_id, items.item_title as title FROM cart, items WHERE $id = cart.id AND cart.item_id = items.item_id AND session_id='$session'");
+                $idCart = $result['cart_id'];
+
+               executeSql("DELETE FROM cart WHERE id = '$idCart'");
+
+                header("Location: /cart/");
+                die();
+               
+            }
+
+            $params["count"] = $count;
+            $params["title"] = "Cart";
+            $params["items"] = getCartItems($session);          
+
+            break;
+
 
         case "item":
 
@@ -83,7 +112,11 @@ function prepareVariables($page, $action) {
 
         case "feedback":
 
-            $feedback = doFeedbackAction($action);
+            $name = $_POST["name"] ?? "";
+            $text = $_POST["text"] ?? "";
+            $id = $_GET['id'] ?? "";
+
+            $feedback = doFeedbackAction($action, $name, $text, $id);
     
             $params["title"] = "Feedback";
             $params["feedback"] = getFeedback();

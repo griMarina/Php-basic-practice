@@ -63,11 +63,8 @@ function saveFeedback($name, $text, $id) {
     die();
 }
 
-function doFeedbackAction($action) {
+function doFeedbackAction($action, $name, $text, $id) {
 
-    $name = $_POST["name"] ?? "";
-    $text = $_POST["text"] ?? "";
-    $id = $_GET['id'] ?? "";
 
     switch($action) {
         case "add":
