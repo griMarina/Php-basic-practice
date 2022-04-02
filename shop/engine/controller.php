@@ -3,13 +3,11 @@
 
 function prepareVariables($page, $action) {
 
-    session_start();
     $session = session_id();
 
-    $status = $_GET["status"] ?? "";    
-    $res = getOneResult("SELECT SUM(quantity) as quantity FROM `cart` WHERE `session_id` = '$session'");
-    $count = (int) $res["quantity"];
-    $params["menu"] = getMenu($count);
+    $status = $_GET["status"] ?? ""; 
+
+    $params["menu"] = getMenu(getCount($session));
 
     switch ($page) {
 
@@ -84,7 +82,7 @@ function prepareVariables($page, $action) {
                 die(); 
             }
 
-            $params["count"] = $count;
+            $params["count"] = getCount($session);
             $params["title"] = "Cart";
             $params["items"] = getCartItems($session);          
 
@@ -102,6 +100,13 @@ function prepareVariables($page, $action) {
             if (isset($item)) {
                 $params["item"] = $item;
                 $params["postTitle"] = $item["item_title"];
+
+                if ($action == "buy") {
+                    $item_id = (int)$_POST["id"];
+                    addToCart($item_id, $session);
+                    header("Location: /item/?id=$id");
+                    die();
+                }
             }
             break;
 

@@ -113,7 +113,9 @@ animation: movement 0.2s infinite;
 }
 
 .item_txt {
-	text-align:right;
+	text-align: right;
+	margin-left: 20px;
+
 }
 
 .form_fd input, textarea {

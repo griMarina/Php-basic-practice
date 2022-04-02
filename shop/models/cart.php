@@ -1,5 +1,10 @@
 <?php
 
+function getCount($session) {
+    $res = getOneResult("SELECT SUM(quantity) as quantity FROM `cart` WHERE `session_id` = '$session'");
+    return (int) $res["quantity"];
+}
+
 function getCartItems($session) {
     return getAssocResult("SELECT * FROM `cart`, `items`  WHERE `session_id` = '$session' AND cart.item_id = items.item_id"); 
 }
