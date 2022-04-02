@@ -81,8 +81,7 @@ function prepareVariables($page, $action) {
                 $cart_id = (int)$_POST["id"];
                 deleteFromCart($cart_id, $session);
                 header("Location: /cart/");
-                die();
-               
+                die(); 
             }
 
             $params["count"] = $count;

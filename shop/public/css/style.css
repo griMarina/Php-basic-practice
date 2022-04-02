@@ -136,3 +136,13 @@ animation: movement 0.2s infinite;
 .list_fd a {
 	text-decoration: none;
 }
+
+.form_cart {
+	display: flex;
+	margin-bottom: 15px;
+}
+
+.cart_text{
+	font-size: 15px;
+	margin-left: 10px;
+}
