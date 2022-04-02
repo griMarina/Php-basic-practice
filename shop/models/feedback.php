@@ -65,7 +65,6 @@ function saveFeedback($name, $text, $id) {
 
 function doFeedbackAction($action, $name, $text, $id) {
 
-
     switch($action) {
         case "add":
             addFeedback($name, $text);
@@ -77,6 +76,7 @@ function doFeedbackAction($action, $name, $text, $id) {
             $id = (int)$_POST['id'];
             saveFeedback($name, $text, $id);
     }
+    
     return [
         "result" => ["id" => "", "name" => "", "text" => ""],
         "buttonText" => "Add message",

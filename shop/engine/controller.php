@@ -102,8 +102,7 @@ function prepareVariables($page, $action) {
                 $params["postTitle"] = $item["item_title"];
 
                 if ($action == "buy") {
-                    $item_id = (int)$_POST["id"];
-                    addToCart($item_id, $session);
+                    addToCart($id, $session);
                     header("Location: /item/?id=$id");
                     die();
                 }
