@@ -7,8 +7,8 @@ function prepareVariables($page, $action) {
     $session = session_id();
 
     $status = $_GET["status"] ?? "";    
-    $res = getOneResult("SELECT count(id) as count FROM `cart` WHERE `session_id` = '$session'");
-    $count = (int) $res["count"];
+    $res = getOneResult("SELECT SUM(quantity) as quantity FROM `cart` WHERE `session_id` = '$session'");
+    $count = (int) $res["quantity"];
     $params["menu"] = getMenu($count);
 
     switch ($page) {
@@ -67,8 +67,8 @@ function prepareVariables($page, $action) {
             $params["items"] = getCatalog();
 
             if ($action == "buy") {
-                $id = (int)$_POST["id"];
-                mysqli_query(getDb(), "INSERT INTO `cart` (`session_id`, `item_id`) VALUES ('$session', '$id')");
+                $item_id = (int)$_POST["id"];
+                addToCart($item_id, $session);
                 header("Location: /catalog/");
                 die();
             }
@@ -78,12 +78,8 @@ function prepareVariables($page, $action) {
         case "cart":
 
             if ($action == "delete") {
-                $id = (int)$_POST["id"];
-                $result = getOneResult("SELECT cart.id as cart_id, items.item_id as item_id, items.item_title as title FROM cart, items WHERE $id = cart.id AND cart.item_id = items.item_id AND session_id='$session'");
-                $idCart = $result['cart_id'];
-
-               executeSql("DELETE FROM cart WHERE id = '$idCart'");
-
+                $cart_id = (int)$_POST["id"];
+                deleteFromCart($cart_id, $session);
                 header("Location: /cart/");
                 die();
                
