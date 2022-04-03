@@ -3,14 +3,41 @@
 
 function prepareVariables($page, $action) {
 
-    $session = session_id();
-
+    $session = session_id() ?? "";
     $status = $_GET["status"] ?? ""; 
 
     $params["menu"] = getMenu(getCount($session));
+    $params["name"] = getUser();
+    $params["authorization"] = isAuthorized();
 
     switch ($page) {
 
+        case  "login": 
+            $login = $_POST["login"];
+            $pass = $_POST["pass"];
+
+            if (authorization($login, $pass)) {
+
+                if (isset($_POST["save"])) {
+                    $hash = uniqid(rand(), true);
+                    $id = $_SESSION["id"];
+                    updateHash($hash, $id);
+                    setcookie("hash", $hash, time() + 3600, "/");   
+                }
+                header("Location: /");
+                die();
+            } else {
+                die("Incorrect login or password");
+            }
+            break;
+        
+        case "logout": 
+            setcookie("hash", "", time() - 1, "/");
+            session_regenerate_id();
+            session_destroy();
+            header("Location: /");
+            die();
+    
         case "index":
             $params["title"] = "Main";
             break;

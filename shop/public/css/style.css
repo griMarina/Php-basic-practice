@@ -144,7 +144,11 @@ animation: movement 0.2s infinite;
 	margin-bottom: 15px;
 }
 
-.cart_text{
+.cart_text {
 	font-size: 15px;
 	margin-left: 10px;
+}
+
+.signout {
+	text-decoration: none;
 }

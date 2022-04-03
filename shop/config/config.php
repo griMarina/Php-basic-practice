@@ -15,6 +15,7 @@ define("DB", "shop");
 include ROOT . "/engine/render.php";
 include ROOT . "/engine/controller.php";
 include ROOT . "/engine/db.php";
+include ROOT . "/engine/authorization.php";
 include ROOT . "/models/menu.php";
 include ROOT . "/models/classSimpleImage.php";
 include ROOT . "/models/catalog.php";

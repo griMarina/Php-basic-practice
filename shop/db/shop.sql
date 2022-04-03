@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:8889
--- Время создания: Мар 27 2022 г., 12:04
+-- Время создания: Апр 03 2022 г., 21:31
 -- Версия сервера: 5.7.34
 -- Версия PHP: 7.4.21
 
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- База данных: `shop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `session_id` text NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -45,7 +58,7 @@ INSERT INTO `feedback` (`id`, `name`, `text`) VALUES
 (5, 'Peter', 'I like it!!!'),
 (6, '1111', 'NO'),
 (7, 'user', 'la-la-la'),
-(8, 'Lisa', 'LIKE!');
+(45, 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -64,17 +77,17 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `name_img`, `views`) VALUES
-(1, '01.jpg', 15),
-(2, '02.jpg', 5),
-(3, '03.jpg', 1),
+(1, '01.jpg', 17),
+(2, '02.jpg', 16),
+(3, '03.jpg', 2),
 (4, '04.jpg', 0),
-(5, '05.jpg', 19),
+(5, '05.jpg', 28),
 (6, '06.jpg', 1),
 (7, '07.jpg', 0),
 (8, '08.jpg', 2),
-(9, '09.jpg', 1),
+(9, '09.jpg', 2),
 (10, '10.jpg', 0),
-(11, '11.jpg', 3),
+(11, '11.jpg', 6),
 (12, '12.jpg', 0);
 
 -- --------------------------------------------------------
@@ -97,22 +110,49 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`item_id`, `item_title`, `item_desc`, `item_price`, `item_img`, `item_views`) VALUES
-(1, 'Rucksack', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 200, '01.jpg', 18),
-(2, 'Suit', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 500, '02.jpg', 2),
-(3, 'Pullover', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 400, '03.jpg', 8),
-(4, 'Trousers', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 600, '04.jpg', 1),
-(5, 'Jacket', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 800, '05.jpg', 0),
-(6, 'Blouse', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 400, '06.jpg', 0),
-(7, 'Jacket', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 900, '07.jpg', 0),
-(8, 'Pullover', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 500, '08.jpg', 0),
-(9, 'Cap', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 300, '09.jpg', 0),
+(1, 'Rucksack', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 200, '01.jpg', 54),
+(2, 'Suit', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 500, '02.jpg', 38),
+(3, 'Pullover', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 400, '03.jpg', 57),
+(4, 'Trousers', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 600, '04.jpg', 3),
+(5, 'Jacket', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 800, '05.jpg', 10),
+(6, 'Blouse', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 400, '06.jpg', 5),
+(7, 'Jacket', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 900, '07.jpg', 2),
+(8, 'Pullover', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 500, '08.jpg', 15),
+(9, 'Cap', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 300, '09.jpg', 1),
 (10, 'Shirt', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 700, '10.jpg', 0),
-(11, 'Leather jacket', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 2300, '11.jpg', 1),
-(12, 'Shorts', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 600, '12.jpg', 0);
+(11, 'Leather jacket', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 2300, '11.jpg', 4),
+(12, 'Shorts', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 600, '12.jpg', 7);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `pass` text NOT NULL,
+  `hash` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `login`, `pass`, `hash`) VALUES
+(1, 'admin', '123', '1446464841624a122887e0c4.55932455'),
+(2, 'user', '321', '0');
 
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `feedback`
@@ -133,14 +173,27 @@ ALTER TABLE `items`
   ADD PRIMARY KEY (`item_id`);
 
 --
+-- Индексы таблицы `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `login` (`login`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
+
+--
+-- AUTO_INCREMENT для таблицы `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT для таблицы `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT для таблицы `images`
@@ -153,6 +206,12 @@ ALTER TABLE `images`
 --
 ALTER TABLE `items`
   MODIFY `item_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
