@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:8889
--- Время создания: Апр 04 2022 г., 11:35
+-- Время создания: Апр 04 2022 г., 11:57
 -- Версия сервера: 5.7.34
 -- Версия PHP: 7.4.21
 
@@ -132,7 +132,7 @@ INSERT INTO `items` (`item_id`, `item_title`, `item_desc`, `item_price`, `item_i
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `login` varchar(255) NOT NULL,
-  `pass_hash` text NOT NULL,
+  `pass` text NOT NULL,
   `hash` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -140,7 +140,7 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `pass_hash`, `hash`) VALUES
+INSERT INTO `users` (`id`, `login`, `pass`, `hash`) VALUES
 (1, 'admin', '$2y$10$CamQWcWLNlFr5KGsi3FV5OB8iHa6Yu5GWF6mK7k70raXC06Go7Yse', '537247566624ad24d1a0ac1.15962202'),
 (2, 'user', '$2y$10$pIjkDo5GwEQBlwsY7eoZS.T22RPQg4MWKS5InqVk94MKSej7TLQFC', '469932238624a1b02e7dc45.18957483');
 

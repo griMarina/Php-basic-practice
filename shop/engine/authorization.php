@@ -11,17 +11,18 @@ function isAdmin() {
 }
 
 function isAuthorized() {
+
+    if (!isset($_SESSION["login"])) {
+        if (isset($_COOKIE["hash"])) {
+            $hash = $_COOKIE["hash"];
+            $result = getOneResult("SELECT * FROM `users` WHERE `hash` = '{$hash}'");
+            $user = $result["login"];
     
-    if (isset($_COOKIE["hash"])) {
-        $hash = $_COOKIE["hash"];
-        $result = getOneResult("SELECT * FROM `users` WHERE `hash` = '{$hash}'");
-        $user = $result["login"];
-
-        if (!empty($user)) {
-            $_SESSION["login"] = $user;
-            $_SESSION["id"] = $result["id"];
+            if (!empty($user)) {
+                $_SESSION["login"] = $user;
+                $_SESSION["id"] = $result["id"];
+            }
         }
-
     }
     return isset($_SESSION["login"]);
 }
@@ -31,7 +32,7 @@ function authorization($login, $pass) {
     $result = getOneResult("SELECT * FROM users WHERE `login` = '{$login}'");
 
     if (isset($result)) {
-        if (password_verify($pass, $result["pass_hash"])) {
+        if (password_verify($pass, $result["pass"])) {
             $_SESSION["login"] = $login;
             $_SESSION["id"] = $result["id"];
             return true;
