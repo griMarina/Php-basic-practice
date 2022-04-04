@@ -11,7 +11,7 @@ function isAdmin() {
 }
 
 function isAuthorized() {
-
+    
     if (isset($_COOKIE["hash"])) {
         $hash = $_COOKIE["hash"];
         $result = getOneResult("SELECT * FROM `users` WHERE `hash` = '{$hash}'");
@@ -30,15 +30,16 @@ function authorization($login, $pass) {
     $login = mysqli_real_escape_string(getDb(), strip_tags(stripslashes($login)));
     $result = getOneResult("SELECT * FROM users WHERE `login` = '{$login}'");
 
-    if ($pass == $result["pass"]) {
-        $_SESSION["login"] = $login;
-        $_SESSION["id"] = $result["id"];
-        return true;
+    if (isset($result)) {
+        if (password_verify($pass, $result["pass_hash"])) {
+            $_SESSION["login"] = $login;
+            $_SESSION["id"] = $result["id"];
+            return true;
+        }
+        return false;
     }
-    return false;
 }
 
 function updateHash($hash, $id) {
     return executeSql("UPDATE users SET `hash`='{$hash}' WHERE `id`='{$id}'");
-
 }

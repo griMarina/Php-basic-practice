@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:8889
--- Время создания: Апр 03 2022 г., 21:31
+-- Время создания: Апр 04 2022 г., 11:35
 -- Версия сервера: 5.7.34
 -- Версия PHP: 7.4.21
 
@@ -110,9 +110,9 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`item_id`, `item_title`, `item_desc`, `item_price`, `item_img`, `item_views`) VALUES
-(1, 'Rucksack', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 200, '01.jpg', 54),
+(1, 'Rucksack', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 200, '01.jpg', 61),
 (2, 'Suit', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 500, '02.jpg', 38),
-(3, 'Pullover', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 400, '03.jpg', 57),
+(3, 'Pullover', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 400, '03.jpg', 58),
 (4, 'Trousers', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 600, '04.jpg', 3),
 (5, 'Jacket', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 800, '05.jpg', 10),
 (6, 'Blouse', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio est, veniam pariatur excepturi illo et distinctio itaque quibusdam laudantium voluptatum consequatur facere, earum quaerat magni dolores corporis repellendus. Voluptatum, facere.', 400, '06.jpg', 5),
@@ -132,7 +132,7 @@ INSERT INTO `items` (`item_id`, `item_title`, `item_desc`, `item_price`, `item_i
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `login` varchar(255) NOT NULL,
-  `pass` text NOT NULL,
+  `pass_hash` text NOT NULL,
   `hash` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -140,9 +140,9 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `pass`, `hash`) VALUES
-(1, 'admin', '123', '1446464841624a122887e0c4.55932455'),
-(2, 'user', '321', '0');
+INSERT INTO `users` (`id`, `login`, `pass_hash`, `hash`) VALUES
+(1, 'admin', '$2y$10$CamQWcWLNlFr5KGsi3FV5OB8iHa6Yu5GWF6mK7k70raXC06Go7Yse', '537247566624ad24d1a0ac1.15962202'),
+(2, 'user', '$2y$10$pIjkDo5GwEQBlwsY7eoZS.T22RPQg4MWKS5InqVk94MKSej7TLQFC', '469932238624a1b02e7dc45.18957483');
 
 --
 -- Индексы сохранённых таблиц
@@ -187,7 +187,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `feedback`
