@@ -93,6 +93,7 @@ function prepareVariables($page, $action) {
 
             if ($action == "buy") {
                 $item_id = (int)$_POST["id"];
+                //var_dump($_POST);
                 addToCart($item_id, $session);
                 header("Location: /catalog/");
                 die();
