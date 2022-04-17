@@ -12,7 +12,7 @@ function prepareVariables($page, $action) {
 
     switch ($page) {
 
-        case  "login": 
+        case "login": 
             $login = $_POST["login"];
             $pass = $_POST["pass"];
 
@@ -24,7 +24,7 @@ function prepareVariables($page, $action) {
                     updateHash($hash, $id);
                     setcookie("hash", $hash, time() + 3600, "/");   
                 }
-                header("Location: /");
+                header("Location: " . $_SERVER["HTTP_REFERER"]);
                 die();
             } else {
                 die("Incorrect login or password");
@@ -35,7 +35,7 @@ function prepareVariables($page, $action) {
             setcookie("hash", "", time() - 1, "/");
             session_regenerate_id();
             session_destroy();
-            header("Location: /");
+            header("Location: " . $_SERVER["HTTP_REFERER"]);
             die();
     
         case "index":
@@ -93,7 +93,6 @@ function prepareVariables($page, $action) {
 
             if ($action == "buy") {
                 $item_id = (int)$_POST["id"];
-                //var_dump($_POST);
                 addToCart($item_id, $session);
                 header("Location: /catalog/");
                 die();
