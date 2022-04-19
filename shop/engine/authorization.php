@@ -7,7 +7,9 @@ function getUser() {
 }
 
 function isAdmin() {
-    return $_SESSION["login"] == "admin";
+    if (!empty($_SESSION)) {
+        return $_SESSION["login"] == "admin";
+    }
 }
 
 function isAuthorized() {

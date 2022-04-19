@@ -93,7 +93,10 @@ function prepareVariables($page, $action) {
 
             if ($action == "buy") {
                 $item_id = (int)$_POST["id"];
-                addToCart($item_id, $session);
+                $item_price = $_POST["price"];
+                $user_id = $_SESSION["id"];
+
+                addToCart($item_id, $session, $item_price, $user_id);
                 header("Location: /catalog/");
                 die();
             }
@@ -109,12 +112,25 @@ function prepareVariables($page, $action) {
                 die(); 
             }
 
+            if ($action == "order") {
+                $name = $_POST["name"];
+                $surname = $_POST["surname"];
+                $phone = $_POST["phone"];
+
+                addOrder($name, $surname, $phone, $session);
+                session_regenerate_id();
+                //session_destroy();
+                header("Location: /catalog" );
+                die();
+                
+            }
+
             $params["count"] = getCount($session);
             $params["title"] = "Cart";
-            $params["items"] = getCartItems($session);          
+            $params["items"] = getCartItems($session);
+            $params["sum"] = getSumItems($session);    
 
             break;
-
 
         case "item":
 
@@ -129,7 +145,10 @@ function prepareVariables($page, $action) {
                 $params["postTitle"] = $item["item_title"];
 
                 if ($action == "buy") {
-                    addToCart($id, $session);
+                    $price = $_POST["price"];
+                    $user_id = $_SESSION["id"];
+
+                    addToCart($id, $session, $price, $user_id);
                     header("Location: /item/?id=$id");
                     die();
                 }
@@ -150,6 +169,38 @@ function prepareVariables($page, $action) {
             $params["buttonText"] = $feedback["buttonText"];
             $params["result"] = $feedback["result"];
             $params["actionFeedback"] = $feedback["actionFeedback"];
+            break;
+
+        case "orders":
+            $params["title"] = "My orders";
+            $params["orders"] = getOrders($session);
+            
+            break;
+
+        case "admin":
+            $admin = isAdmin();
+            
+            if(!$admin) {
+                die("You are not authorized to view this page.");
+            }
+
+            $params["title"] = "Admin panel";
+            $params["orders"] = getOrders();
+
+            break;
+
+        case "order_details":
+            $admin = isAdmin();
+                
+            if(!$admin) {
+                die("You are not authorized to view this page.");
+            }
+
+            $order_id = (int)$_GET["id"];
+
+    
+            $params["title"] = "Order details";
+            $params["orders"] = getOneOrder($order_id);
             break;
 
         case "install":

@@ -26,3 +26,4 @@ include ROOT . "/models/image.php";
 include ROOT . "/models/install.php";
 include ROOT . "/models/calculator.php";
 include ROOT . "/models/feedback.php";
+include ROOT . "/models/orders.php";
