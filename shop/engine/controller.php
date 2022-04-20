@@ -92,21 +92,21 @@ function prepareVariables($page, $action) {
             $params["items"] = getCatalog();
 
             if ($action == "buy") {
-                $item_id = (int)$_POST["id"];
-                $item_price = $_POST["price"];
+                $itemId = (int)$_POST["id"];
+                $itemPrice = $_POST["price"];
+                $userId = $_SESSION["id"];
 
-                addToCart($item_id, $session, $item_price);
+                addToCart($itemId, $session, $itemPrice, $userId);
                 header("Location: /catalog/");
                 die();
             }
-
             break;
 
         case "cart":
 
             if ($action == "delete") {
-                $cart_id = (int)$_POST["id"];
-                deleteFromCart($cart_id, $session);
+                $cartId = (int)$_POST["id"];
+                deleteFromCart($cartId, $session);
                 header("Location: /cart/");
                 die(); 
             }
@@ -115,21 +115,18 @@ function prepareVariables($page, $action) {
                 $name = $_POST["name"];
                 $surname = $_POST["surname"];
                 $phone = $_POST["phone"];
-                $user_id = $_SESSION["id"];
+                $userId = $_SESSION["id"];
                 
-                addOrder($name, $surname, $phone, $session, $user_id);
+                addOrder($name, $surname, $phone, $session, $userId);
                 session_regenerate_id();
-                //session_destroy();
                 header("Location: /catalog" );
-                die();
-                
+                die();         
             }
 
             $params["count"] = getCount($session);
             $params["title"] = "Cart";
             $params["items"] = getCartItems($session);
             $params["sum"] = getSumItems($session);    
-
             break;
 
         case "item":
@@ -138,7 +135,6 @@ function prepareVariables($page, $action) {
             updateItemViews($id);
             $item = getItem($id);
 
-
             $params["title"] = "Item";
             if (isset($item)) {
                 $params["item"] = $item;
@@ -146,8 +142,9 @@ function prepareVariables($page, $action) {
 
                 if ($action == "buy") {
                     $price = $_POST["price"];
+                    $userId = $_SESSION["id"];
 
-                    addToCart($id, $session, $price);
+                    addToCart($id, $session, $price, $userId);
                     header("Location: /item/?id=$id");
                     die();
                 }
@@ -174,8 +171,7 @@ function prepareVariables($page, $action) {
             $params["title"] = "My orders";
 
             $login = getUser();
-            $params["orders"] = getMyOrders($login);
-            
+            $params["orders"] = getMyOrders($login);      
             break;
 
         case "admin":
@@ -187,7 +183,6 @@ function prepareVariables($page, $action) {
 
             $params["title"] = "Admin panel";
             $params["orders"] = getOrders();
-
             break;
 
         case "order_details":
@@ -197,19 +192,18 @@ function prepareVariables($page, $action) {
                 die("You are not authorized to view this page.");
             }
 
-            $order_id = (int)$_GET["id"];
-            $order_status = $_POST["status"] ?? getStatus($order_id);
+            $orderId = (int)$_GET["id"];
+            $orderStatus = $_POST["status"] ?? getStatus($orderId);
 
             $params["title"] = "Order details";
-            $params["postTitle"] = "Order #$order_id";
-            $params["orders"] = getOneOrder($order_id);
-            $params["id"] = $order_id;
-            $params["status"] = $order_status;
-            
-            if ($action == "status") {
-                setOrderStatus($order_status, $order_id);
-            }
+            $params["postTitle"] = "Order #$orderId";
+            $params["orders"] = getOneOrder($orderId);
+            $params["id"] = $orderId;
+            $params["status"] = $orderStatus;
 
+            if ($action == "status") {
+                setOrderStatus($orderStatus, $orderId);
+            }
             break;
 
         case "install":

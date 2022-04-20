@@ -160,5 +160,8 @@ animation: movement 0.2s infinite;
 th, td {
 	border: 1px solid grey;
 	padding: 10px 15px;
+}
 
- }
+.checkout {
+	margin: 10px;
+}

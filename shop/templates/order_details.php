@@ -19,7 +19,7 @@
                 </tr>
                 <?php endforeach; ?>
             </table>
-        <p>Order status: <?=$status ?? "Set order status"?></p>
+        <p>Order status: <?=$status?></p>
         <label for="status">Change order status:</label>
         <select name="status" id="status">
             <option value="pending" <?php if ($status == "pending") echo "selected"?>>Pending</option>

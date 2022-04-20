@@ -1,7 +1,7 @@
 <?php
 
 function getFeedback() {
-    return getAssocResult("SELECT * FROM feedback ORDER BY id DESC"); 
+    return getAssocResult("SELECT * FROM `feedback` ORDER BY `id` DESC"); 
 }
 
 function getFeedbackMessage($status) {
@@ -21,7 +21,7 @@ function addFeedback($name, $text) {
     $name = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $name)));
     $text = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $text )));
     
-    executeSql("INSERT INTO feedback(name, text) VALUES ('$name', '$text')");
+    executeSql("INSERT INTO `feedback` (name, text) VALUES ('$name', '$text')");
 
     $status = "ok";
     header("Location:/feedback/?status=$status");
@@ -30,7 +30,7 @@ function addFeedback($name, $text) {
 
 function deleteFeedback($id) {
 
-    executeSql("DELETE FROM feedback WHERE id=$id");
+    executeSql("DELETE FROM `feedback` WHERE `id` = '$id'");
    
     $status = "delete";
     header("Location:/feedback/?status=$status");
@@ -39,7 +39,7 @@ function deleteFeedback($id) {
 
 function editFeedback($id) {
 
-    $result = getOneResult("SELECT * FROM feedback WHERE id=$id");
+    $result = getOneResult("SELECT * FROM `feedback` WHERE `id` = '$id'");
     $buttonText = "Edit message";
     $actionFeedback = "save";
    
@@ -56,7 +56,7 @@ function saveFeedback($name, $text, $id) {
     $name = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $name)));
     $text = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $text)));
 
-    executeSql("UPDATE feedback SET name='$name', text='$text' WHERE id = $id");
+    executeSql("UPDATE `feedback` SET `name` = '$name', `text` = '$text' WHERE `id` = '$id'");
    
     $status = "edit";
     header("Location:/feedback/?status=$status");
