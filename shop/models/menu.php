@@ -27,7 +27,7 @@ function getMenu($count) {
             "href" => "/feedback"
         ],
         [   "name" => "My orders",
-            "href" => "/orders"
+            "href" => "/my_orders"
         ],
         [   "name" => "Admin panel",
             "href" => "/admin"

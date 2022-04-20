@@ -171,9 +171,11 @@ function prepareVariables($page, $action) {
             $params["actionFeedback"] = $feedback["actionFeedback"];
             break;
 
-        case "orders":
+        case "my_orders":
             $params["title"] = "My orders";
-            $params["orders"] = getOrders($session);
+
+            $login = getUser();
+            $params["orders"] = getMyOrders($login);
             
             break;
 
@@ -197,10 +199,18 @@ function prepareVariables($page, $action) {
             }
 
             $order_id = (int)$_GET["id"];
+            $order_status = $_POST["status"] ?? getStatus($order_id);
 
-    
             $params["title"] = "Order details";
+            $params["postTitle"] = "Order #$order_id";
             $params["orders"] = getOneOrder($order_id);
+            $params["id"] = $order_id;
+            $params["status"] = $order_status;
+            
+            if ($action == "status") {
+                setOrderStatus($order_status, $order_id);
+            }
+
             break;
 
         case "install":

@@ -7,7 +7,7 @@
         <?php foreach ($items as $item): ?>
             <form action="/cart/delete" class="form_cart" method="POST">
                 <input type="text" hidden name="id" value="<?=$item['id']?>">
-                <img src="<?=IMG_SMALL . $item['item_img']?>"/>
+                <img src="<?=IMG_SMALL . $item['item_img']?>" />
                 <div class="cart_text">
                     <p><?=$item['item_title']?></p>
                     <p><?=$item['item_price']?> $</p>
