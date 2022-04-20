@@ -152,3 +152,13 @@ animation: movement 0.2s infinite;
 .signout {
 	text-decoration: none;
 }
+
+.table {
+	border: 1px solid grey;
+}
+
+th, td {
+	border: 1px solid grey;
+	padding: 10px 15px;
+
+ }

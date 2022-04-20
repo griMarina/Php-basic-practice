@@ -94,9 +94,8 @@ function prepareVariables($page, $action) {
             if ($action == "buy") {
                 $item_id = (int)$_POST["id"];
                 $item_price = $_POST["price"];
-                $user_id = $_SESSION["id"];
 
-                addToCart($item_id, $session, $item_price, $user_id);
+                addToCart($item_id, $session, $item_price);
                 header("Location: /catalog/");
                 die();
             }
@@ -116,8 +115,9 @@ function prepareVariables($page, $action) {
                 $name = $_POST["name"];
                 $surname = $_POST["surname"];
                 $phone = $_POST["phone"];
-
-                addOrder($name, $surname, $phone, $session);
+                $user_id = $_SESSION["id"];
+                
+                addOrder($name, $surname, $phone, $session, $user_id);
                 session_regenerate_id();
                 //session_destroy();
                 header("Location: /catalog" );
@@ -146,9 +146,8 @@ function prepareVariables($page, $action) {
 
                 if ($action == "buy") {
                     $price = $_POST["price"];
-                    $user_id = $_SESSION["id"];
 
-                    addToCart($id, $session, $price, $user_id);
+                    addToCart($id, $session, $price);
                     header("Location: /item/?id=$id");
                     die();
                 }

@@ -9,17 +9,13 @@ function getCartItems($session) {
     return getAssocResult("SELECT * FROM `cart`, `items`  WHERE `session_id` = '$session' AND cart.item_id = items.item_id"); 
 }
 
-function addToCart($item_id, $session, $item_price, $user_id) {
+function addToCart($item_id, $session, $item_price) {
     $result = getOneResult("SELECT id FROM `cart` WHERE item_id = '$item_id' AND `session_id` = '$session'");
     
     if (isset($result)) {
         executeSql("UPDATE `cart` SET quantity = quantity + 1 WHERE id = {$result['id']}");
     } else {
         executeSql("INSERT INTO `cart` (`session_id`, `item_id`, `item_price`) VALUES ('$session', '$item_id', '$item_price')");
-    }
-
-    if (isAuthorized()) {
-        executeSql("UPDATE cart SET user_id = '$user_id' WHERE `session_id` = '{$session}'");
     }
 }
 
@@ -43,8 +39,11 @@ function getSumItems($session) {
     return $result['sum'];
 }
 
-function addOrder($name, $surname, $phone, $session) {
+function addOrder($name, $surname, $phone, $session, $user_id) {
     
     executeSql("INSERT INTO orders (`name`, `surname`, `phone`, `session_id`) VALUES ('$name', '$surname', '$phone', '$session')");   
-   
+
+    if (isAuthorized()) {
+        executeSql("UPDATE orders SET user_id = '$user_id' WHERE `session_id` = '{$session}'");
+    }
 }

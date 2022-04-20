@@ -1,7 +1,7 @@
 <?php
 
 function getOrders() {
-    return getAssocResult("SELECT `id`, `name`, `surname`, `phone` FROM `orders` ORDER BY id DESC");
+    return getAssocResult("SELECT `id`, `name`, `surname`, `phone`, `status` FROM `orders` ORDER BY id DESC");
 }
 
 function getOneOrder($order_id) {
@@ -14,8 +14,8 @@ function getMyOrders($login) {
     if ($login) {
         $user_id = getOneResult("SELECT `id` FROM `users` WHERE `login` = '$login'")["id"];
 
-        return getAssocResult("SELECT `item_title`, `quantity`, cart.item_price, `item_img` FROM `cart`, `items` WHERE `user_id` = '$user_id' AND cart.item_id = items.item_id");
-    }   
+        return getAssocResult("SELECT orders.id, `status`, `item_title`, `quantity`, cart.item_price, `item_img` FROM `orders`, `cart`, `items` WHERE orders.user_id = '$user_id' AND cart.item_id = items.item_id AND orders.session_id = cart.session_id");
+    }  
 }
 
 function setOrderStatus($status, $order_id) {

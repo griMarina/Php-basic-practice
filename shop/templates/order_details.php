@@ -1,11 +1,24 @@
 <div class="post_title"><h2><?=$postTitle ?? ""?></h2></div>
 <?php if (isset($orders)) :?>
     <form action="/order_details/status/?id=<?=$id?>"  method="POST">
-        <?php foreach ($orders as $order): ?> 
-            <p>User ID: <?=$order['user_id'] ?? 'guest'?></p>
-            <p>Item details: ID: <?=$order['item_id']?>, <?=$order['item_title']?>, qnt: <?=$order['quantity']?>, total: $<?=$order['item_price'] * $order['quantity']?> </p>
-            <hr>
-        <?php endforeach; ?>
+    <p>User ID: <?=$orders[0]["user_id"] ?? 'guest'?></p>
+    <p>Item details: </p>
+            <table class="table">
+                <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th>qnt x price</th>
+                    <th>total</th>
+                </tr>
+                <?php foreach ($orders as $order): ?> 
+                <tr>
+                    <td><?=$order['item_id']?></td>
+                    <td><?=$order['item_title']?></td>
+                    <td><?=$order['quantity']?> X <?=$order['item_price']?>$</td>
+                    <td><?=$order['item_price'] * $order['quantity']?>$</td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
         <p>Order status: <?=$status ?? "Set order status"?></p>
         <label for="status">Change order status:</label>
         <select name="status" id="status">
